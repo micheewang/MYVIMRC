@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='d:/workspace/egg/run'
+let g:netrw_dirhist_1='d:/workspace/egg'
+let g:netrw_dirhist_0='d:/workspace/cc/src'
+let g:netrw_dirhist_9='d:/workspace/cc'
+let g:netrw_dirhist_8='d:/workspace/self/util'
+let g:netrw_dirhist_7='d:/workspace/self/fd'
+let g:netrw_dirhist_6='d:/workspace'
+let g:netrw_dirhist_5='C:/Users/six/AppData/Local/nvim'
+let g:netrw_dirhist_4='C:/Users/six/AppData/Local'
+let g:netrw_dirhist_3='C:/Users/six/AppData/Local/nvim'
