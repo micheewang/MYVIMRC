@@ -37,7 +37,7 @@ Plug '~/my-prototype-plugin'
 Plug 'honza/vim-snippets'
 
 "theme color
-Plug 'yuttie/inkstained-vim' | Plug 'tomasr/molokai' | Plug 'altercation/solarized' | Plug 'crusoexia/vim-monokai'
+Plug 'yuttie/inkstained-vim' | Plug 'tomasr/molokai' | Plug 'altercation/vim-colors-solarized' | Plug 'crusoexia/vim-monokai'
 
 Plug 'Yggdroot/indentLine'
 
@@ -50,10 +50,15 @@ Plug 'terryma/vim-multiple-cursors'
 " emmet quick-html
 Plug 'mattn/emmet-vim'
 
+"markdown
 Plug 'JamshedVesuna/vim-markdown-preview'
 
+"airline
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
+" auto fcitx
+Plug 'Neur1n/neuims'
 " Initialize plugin system
 
 call plug#end()
@@ -137,6 +142,8 @@ set hlsearch
 "                               keyboard-binding                             "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap ch :noh<CR>
+
+nnoremap <silent> <leader>it :call neuims#Toggle()<CR>
 
 nmap <leader>s :update<CR>
 vmap <leader>s :update<CR>
@@ -359,3 +366,4 @@ augroup vimrcEx
   au BufEnter *.js syn match error contained "\<debugger\>"
   au BufEnter *.coffee syn match error contained "\<debugger\>"
 augroup END
+
