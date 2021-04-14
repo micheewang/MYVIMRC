@@ -135,8 +135,6 @@ set autoread
 
 set hlsearch
 
-"功能说明:加入或删除注释//
-"映射和绑定
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               keyboard-binding                             "
@@ -144,9 +142,6 @@ set hlsearch
 nnoremap ch :noh<CR>
 
 nnoremap <silent> <leader>it :call neuims#Toggle()<CR>
-
-nmap <leader>s :update<CR>
-vmap <leader>s :update<CR>
 
 nmap <leader>tn :tabnew<cr>
 nmap <leader>tc :tabclose<cr>
@@ -162,16 +157,6 @@ nnoremap <M-j> :resize +5<cr>
 nnoremap <M-k> :resize -5<cr>
 nnoremap <M-h> :vertical resize -5<cr>
 nnoremap <M-l> :vertical resize +5<cr>
-
-" 快速保存
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <ESC>:w<CR>a
-
-" 创建空行
-"nnoremap <Leader>n o<ESC>
-
-"插入模式退出
-inoremap jj <ESC>
 
 " 正常模式快速移动
 nnoremap <C-j> 3j
@@ -197,59 +182,58 @@ nnoremap <leader>v "ap
 nnoremap <leader>V viw"ap
 vnoremap <leader>v "ap
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                            myconfig settings                               "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set runtimepath+=~\AppData\Local\nvim\myconfig\
+
+"snippet
+let g:UltiSnipsSnippetDirectories=["snippets"]
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              plugin settings                               "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype plugin indent on
-" markdown keyboard
-" let vim_markdown_preview_hotkey='<C-m>'
-
-"my snippets
-let g:UltiSnipsSnippetDirectories=["mysnippets"]
 
 " coc
-"coc-snippets
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<tab>'
-"
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-" let g:coc_snippet_prev = '<c-k>'
-"
-" Use <C-j> for both expand and jump (make expand higher priority.)
-" imap <C-j> <Plug>(coc-snippets-expand-jump)
+let g:coc_snippet_prev = '<C-k>'
+let g:coc_snippet_next = '<tab>'
 
-" Use <leader>x for convert visual selected code to snippet
-xmap <leader>x  <Plug>(coc-convert-snippet)
+"snippets list jump
+inoremap <silent><expr> <C-j> 
+	 \ pumvisible() ? "\<C-n>" :
+	 \ <SID>check_back_space() ? "\<C-j>" :
+	 \ coc#refresh()
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <C-j>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+inoremap <silent><expr> <TAB>
+	  \ pumvisible() ? coc#_select_confirm() :
+	  \ coc#expandableOrJumpable() ?
+	  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	  \ <SID>check_back_space() ? "\<TAB>" :
+	  \ coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
+let g:coc_snippet_next = '<tab>'
 
 
 
@@ -297,8 +281,6 @@ let g:NERDTrimTrailingWhitespace = 1
 " autocmd vimenter * NERDTree  "自动开启Nerdtree
 let g:NERDTreeWinSize = 25 "设定 NERDTree 视窗大小
 let NERDTreeShowBookmarks=1  " 开启Nerdtree时自动显示Bookmarks
-"打开vim时如果没有文件自动打开NERDTree
-" autocmd vimenter * if !argc()|NERDTree|endif
 "当NERDTree为剩下的唯一窗口时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " 设置树的显示图标
@@ -313,14 +295,11 @@ let NERDTreeDirArrows = 1
 " 开启/关闭nerdtree快捷键
 nnoremap <F3> :NERDTreeToggle<CR> 
 
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   others                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Put these in an autocmd group, so that we can delete them easily.
-
 augroup vimrcEx
   autocmd!
 
@@ -356,6 +335,7 @@ augroup vimrcEx
   autocmd FileType eruby set iskeyword=@,48-57,_,192-255,$,-
 
   " Auto reload VIM when settings changed
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
   autocmd BufWritePost .vimrc so $MYVIMRC
   autocmd BufWritePost *.vim so $MYVIMRC
   autocmd BufWritePost vimrc.symlink so $MYVIMRC
@@ -366,4 +346,3 @@ augroup vimrcEx
   au BufEnter *.js syn match error contained "\<debugger\>"
   au BufEnter *.coffee syn match error contained "\<debugger\>"
 augroup END
-

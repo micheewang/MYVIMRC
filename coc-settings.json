@@ -7,8 +7,6 @@
   "suggest.noselect": false,
   // "suggest.triggerAfterInsertEnter": true
   "suggest.minTriggerInputLength": 2,
-  // Target to show hover information, default is floating window when possible.
-  "coc.preferences.hoverTarget": "preview",
   // Auto close preview window on cursor move.,  default: `true`
   "coc.preferences.previewAutoClose": false,
   //coc snippets
@@ -19,5 +17,11 @@
     "typescript": [
       "javascript"
     ]
-  }
+  },
+  "snippets.ultisnips.directories": [
+    "snippets",
+    "UltiSnips"
+  ],
+  "list.maxHeight": 18,
+  "list.autoResize": false,
 }

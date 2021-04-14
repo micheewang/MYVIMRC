@@ -1,26 +1,20 @@
 snippet imp
 import ${1:module} from './${2:path}';
-endsnippet
 
 snippet clg
 console.log(${1:variable});
-endsnippet
 
 snippet clt
 console.time(${1:name});
-endsnippet
 
 snippet clte
 console.timeEnd(${1:name});
-endsnippet
 
 snippet for
 for (var ${2:index} = 0, len = ${1:variable}.length; ${2:index} < len; ${2:index}++) {
 	//${4:TODO}
 	${3} 
 }
-endsnippet
 
 snippet tne
 throw new Error('${1:error message}')
-endsnippet
