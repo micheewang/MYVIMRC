@@ -141,7 +141,7 @@ set hlsearch
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap ch :noh<CR>
 
-nnoremap <silent> <leader>it :call neuims#Toggle()<CR>
+nnoremap  <leader>it :call neuims#Toggle()<CR>
 
 nmap <leader>tn :tabnew<cr>
 nmap <leader>tc :tabclose<cr>
@@ -173,8 +173,6 @@ inoremap <M-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
 
-" trailling whitespace
-nnoremap <leader>d :%s/\s\+$//<cr>:let @/=''<CR>
 
 " easy copy and replace
 nnoremap <leader>y "ayiw
@@ -200,13 +198,13 @@ filetype plugin indent on
 " coc
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <c-a>  <Plug>(coc-codeaction-selected)
+nmap <c-a>  <Plug>(coc-codeaction-selected)
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
+nmap <silent> <c-s> <Plug>(coc-range-select)
+xmap <silent> <c-s> <Plug>(coc-range-select)
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
@@ -216,7 +214,7 @@ let g:coc_snippet_prev = '<C-k>'
 let g:coc_snippet_next = '<tab>'
 
 "snippets list jump
-inoremap <silent><expr> <C-j> 
+inoremap <silent><expr> <C-j>
 	 \ pumvisible() ? "\<C-n>" :
 	 \ <SID>check_back_space() ? "\<C-j>" :
 	 \ coc#refresh()
@@ -262,6 +260,11 @@ command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  'tmp$\|\.git$\|\.hg$\|\.svn$\|.rvm$|.bundle$\|node_modules\',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe
 "let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'
@@ -293,7 +296,7 @@ let g:NERDTreeHidden=0     "不显示隐藏文件
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 " 开启/关闭nerdtree快捷键
-nnoremap <F3> :NERDTreeToggle<CR> 
+nnoremap <F3> :NERDTreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   others                                   "
